@@ -1,16 +1,16 @@
 import mongoose from "mongoose";
+import dotenv from "dotenv";
 
 
-async function connectToDatabase() {
+export async function connectToDatabase() {
   try {
-    await mongoose.connect(process.env.MONGODB_URL, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    const url: any = process.env.MONGODB_URL;
+    await mongoose.connect(url);
     console.log('Connected to MongoDB');
   } catch (error) {
     console.error('MongoDB connection error:', error);
   }
 }
 
-module.exports = connectToDatabase();
+
+

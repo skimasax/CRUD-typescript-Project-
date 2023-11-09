@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import { UserModel } from "../Model/User";
 import bcrypt from "bcryptjs";
+import { User } from "../Types/User";
 
 export const register = async (req: Request, res: Response) => {
   const { firstname, lastname, email, password, confirm_password } = req.body;
@@ -19,14 +20,12 @@ export const register = async (req: Request, res: Response) => {
     });
   }
 
-  // Add code here to create a new user with the provided information and hash the password using bcrypt.
-
   try {
-    // Example: Hash the password using bcrypt
+    // Hash the password using bcrypt
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Example: Create a new user in the database using the UserModel
-    const newUser = new UserModel({
+    // Create a new user document using the UserModel
+    const newUser: User = new UserModel({
       firstname,
       lastname,
       email,
@@ -34,7 +33,7 @@ export const register = async (req: Request, res: Response) => {
     });
 
     // Save the user to the database
-    await newUser.save();
+    await newUser.save(); // Using the save method provided by Mongoose
 
     return res.status(200).json({
       status: true,
