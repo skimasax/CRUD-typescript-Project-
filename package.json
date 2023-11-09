@@ -1,14 +1,14 @@
 {
-  "name": "typescriptapp",
+  "name": "crud-typescript-project-",
   "version": "1.0.0",
-  "description": "An app built with typescript",
-  "main": "index.js",
+  "description": "",
+  "main": "index.ts",
   "scripts": {
-    "start": "npx tsc && node build/index.js",
-    "server": "nodemon build/index.js"
+    "start": "node src/index.ts",
+    "server": "nodemon src/index.ts"
   },
-  "author": "skima",
-  "license": "MIT",
+  "author": "",
+  "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",

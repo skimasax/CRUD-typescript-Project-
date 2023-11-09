@@ -5,31 +5,26 @@ import mongoose from "mongoose";
 import UserRouter from "./Router/users";
 import { connectToDatabase as db } from "./Config/Database";
 
-const app: Application = express();
-const envResult = dotenv.config();
+const app = express();
+dotenv.config();
+
+const corsOptions = {
+  origin: "*",
+  credentials: true,
+  optionSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
 
 app.use(express.json());
-app.use(cors());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 
-app.get('api/v1/register', (req:Request,res:Response)=>{
-    res.send('hello');
-});
+app.use("/api/v1", UserRouter);
 
-const port: number = parseInt(process.env.PORT || "4000");
-
-
-
-
-
-
-
-
-
-
+const port: number = parseInt(process.env.PORT || "3000");
 
 app.listen(port, () => {
-    console.log(`Typescript app started on port ${port}`);
+  console.log(`Typescript app started on port ${port}`);
 });
 
 db();
